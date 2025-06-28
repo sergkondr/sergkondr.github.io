@@ -1,0 +1,42 @@
+base_url = "https://kondrashov.me/"
+#theme = "Hermit_Zola"
+compile_sass = true
+build_search_index = false
+ignored_content = []
+
+title = "Making Systems Behave (Mostly)"
+default_language = "en"
+taxonomies = [
+    { name = "tags", rss = false }
+]
+
+generate_sitemap = false
+
+[extra]
+    home_subtitle = "I build reliable infra, write Go when needed, and like making things faster, cheaper, and harder to break. Sometimes I write about it."
+    footer_copyright = ' &#183; <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a>'
+    hermit_menu = [
+        { link = "about", name = "About" },
+#        { link = "posts", name = "Posts" },
+    ]
+    hermit_social = [
+        { name = "email", link = "mailto:s@kondrashov.me"},
+        { name = "github", link = "https://github.com/sergkondr"},
+        { name = "linkedin", link = "https://www.linkedin.com/in/sergei-kondrashov/"},
+        { name = "cv", link = "cv.pdf"},
+    ]
+
+    [extra.highlightjs]
+        enable = true
+        clipboard = true
+        theme = "railscasts"
+
+    [extra.header]
+        index = true
+
+    [extra.footer]
+        index = true
+
+    [extra.author]
+        name = "Sergei Kondrashov"
+        email = "s@kondrashov.me"
