@@ -23,7 +23,6 @@ generate_sitemap = false
         { name = "email", link = "mailto:s@kondrashov.me"},
         { name = "github", link = "https://github.com/sergkondr"},
         { name = "linkedin", link = "https://www.linkedin.com/in/sergei-kondrashov/"},
-        { name = "cv", link = "cv.pdf"},
     ]
 
     [extra.highlightjs]
