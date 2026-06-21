@@ -9,7 +9,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: checkout
-        uses: actions/checkout@v3.0.0
+        uses: actions/checkout@v4
+
+      - name: Checkout LogLifted (for webui)
+        uses: actions/checkout@v4
+        with:
+          repository: skondrashov/loglifted
+          ref: main
+          path: _loglifted
+          sparse-checkout: webui
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Stage Plan Builder
+        run: |
+          mkdir -p static/plan-builder
+          cp _loglifted/webui/*.{html,js,css} static/plan-builder/
 
       - name: build_and_deploy
         uses: shalzz/zola-deploy-action@v0.20.0
