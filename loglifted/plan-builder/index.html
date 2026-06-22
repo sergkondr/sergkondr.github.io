@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LogLifted — Plan Builder</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>LogLifted Plan Builder</h1>
+    <p class="subtitle">Create training plans and export as <code>.lifted</code> files</p>
+    <div class="header-description">
+      <p>Build structured workout programs for the <strong>LogLifted</strong> iOS app — right from your browser. Add exercises, organize them into templates, set up progressions across training cycles, and download the result as a <code>.lifted</code> file ready to import into the app.</p>
+      <p>You can also import an existing <code>.lifted</code> backup to start from your current exercises, templates, and personal bests.</p>
+    </div>
+  </header>
+
+  <main>
+    <!-- 0. Import -->
+    <section id="import-section" class="section collapsible">
+      <h2 class="section-toggle" aria-expanded="true">Import</h2>
+      <p class="section-desc">Load a <code>.lifted</code> backup to populate exercises, templates, and personal bests.</p>
+      <div id="import-dropzone" class="dropzone">
+        <div class="dropzone-content">
+          <span class="dropzone-icon">&#128229;</span>
+          <span class="dropzone-text">Drop <code>.lifted</code> file here or</span>
+          <label for="import-file" class="btn btn-secondary btn-file">
+            Choose file
+            <input type="file" id="import-file" accept=".lifted,.json" hidden>
+          </label>
+        </div>
+        <span id="import-filename" class="import-filename"></span>
+      </div>
+      <div class="error-msg" id="import-error"></div>
+      <div id="import-summary" class="import-summary" hidden></div>
+    </section>
+
+    <!-- 1. Exercises -->
+    <section id="exercises-section" class="section collapsible">
+      <h2 class="section-toggle" aria-expanded="true">Exercises</h2>
+      <form id="exercise-form" class="inline-form">
+        <div class="form-group">
+          <label for="exercise-name">Name</label>
+          <input type="text" id="exercise-name" placeholder="e.g. Bench Press" required>
+        </div>
+        <div class="form-group">
+          <label for="exercise-notes">Notes</label>
+          <input type="text" id="exercise-notes" placeholder="Optional notes">
+        </div>
+        <button type="submit" class="btn btn-primary">Add</button>
+      </form>
+      <div class="error-msg" id="exercise-error"></div>
+      <ul id="exercises-list" class="item-list"></ul>
+    </section>
+
+    <!-- 2. Templates -->
+    <section id="templates-section" class="section collapsible">
+      <h2 class="section-toggle" aria-expanded="true">Templates</h2>
+      <form id="template-form" class="inline-form">
+        <div class="form-group">
+          <label for="template-name">Template name</label>
+          <input type="text" id="template-name" placeholder="e.g. Day A — Push" required>
+        </div>
+        <button type="submit" class="btn btn-primary">New Template</button>
+      </form>
+      <div class="error-msg" id="template-error"></div>
+      <div id="templates-list"></div>
+    </section>
+
+    <!-- 3. Plan -->
+    <section id="plan-section" class="section collapsible">
+      <h2 class="section-toggle" aria-expanded="true">Plan</h2>
+      <div class="plan-header">
+        <div class="form-group">
+          <label for="plan-name">Plan name</label>
+          <input type="text" id="plan-name" placeholder="e.g. 5x5 Strength">
+        </div>
+        <div class="form-group">
+          <label for="plan-notes">Description</label>
+          <textarea id="plan-notes" rows="3" placeholder="Optional program description (a few sentences or a link)"></textarea>
+        </div>
+        <div class="form-group form-group-checkbox">
+          <input type="checkbox" id="plan-looping">
+          <label for="plan-looping">Loop (repeat after last template)</label>
+        </div>
+      </div>
+
+      <h3>Templates in plan</h3>
+      <div class="plan-template-picker">
+        <select id="plan-template-select"></select>
+        <button type="button" id="plan-add-template-btn" class="btn btn-secondary">Add to plan</button>
+      </div>
+      <ul id="plan-templates" class="item-list"></ul>
+
+      <div id="progressions-section" class="progressions-section" hidden>
+        <h3>Progressions</h3>
+        <div id="progressions-list"></div>
+      </div>
+    </section>
+
+    <!-- 4. Export -->
+    <section id="export-section" class="section">
+      <h2>Export</h2>
+      <div id="validation-errors" class="validation-errors"></div>
+      <div class="export-actions">
+        <button type="button" id="preview-btn" class="btn btn-secondary">Preview JSON</button>
+        <button type="button" id="download-btn" class="btn btn-primary">Download .lifted</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Preview modal -->
+  <div id="preview-modal" class="modal" hidden>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>JSON Preview</h3>
+        <button type="button" id="modal-close-btn" class="btn-close">&times;</button>
+      </div>
+      <pre id="preview-json"></pre>
+      <div class="modal-footer">
+        <button type="button" id="modal-download-btn" class="btn btn-primary">Download .lifted</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="export.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
